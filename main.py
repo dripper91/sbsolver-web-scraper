@@ -20,4 +20,3 @@ sorted_all_words = sorted(all_words)
 with open('dictionary.txt', 'w', encoding='utf-8') as file:
     for word in sorted_all_words:
         file.write(f"{word}\n")
-
