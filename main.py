@@ -3,16 +3,21 @@ from bs4 import BeautifulSoup
 with open("answers.html", "r") as answers_page:
     soup = BeautifulSoup(answers_page, "html.parser")
 
-game_answers = []
+new_game_answers = []
 for a_tag in soup.find_all('a', href=True):
     href = a_tag['href']
-    if "com/h" in href:
-        start_index = href.find(".com/h/") + len(".com/h/")
-        end_index = href.find('/', start_index)
-        answer = href[start_index:end_index] if end_index != -1 else href[start_index:]
+    if ".com/h/" in href:
+        answer = href[27:]
         if answer != "":
-            game_answers.append(answer)
+            new_game_answers.append(answer)
 
-game_answers = list(set(game_answers))
-print(game_answers)
+with open('dictionary.txt', 'r', encoding='utf-8') as file:
+    existing_words = [line.strip() for line in file]
+
+all_words = set(existing_words + new_game_answers)
+sorted_all_words = sorted(all_words)
+
+with open('dictionary.txt', 'w', encoding='utf-8') as file:
+    for word in sorted_all_words:
+        file.write(f"{word}\n")
 
