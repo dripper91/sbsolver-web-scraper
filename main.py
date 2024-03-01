@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://www.sbsolver.com/answers"
+url = "https://www.sbsolver.com/s/tbeiLnr"
 answers_page = requests.get(url)
 soup = BeautifulSoup(answers_page.text, "html.parser")
 
