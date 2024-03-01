@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
+import requests
 
-with open("answers.html", "r") as answers_page:
-    soup = BeautifulSoup(answers_page, "html.parser")
+url = "https://www.sbsolver.com/answers"
+answers_page = requests.get(url)
+soup = BeautifulSoup(answers_page.text, "html.parser")
 
 new_game_answers = []
 for a_tag in soup.find_all('a', href=True):
